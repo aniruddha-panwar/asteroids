@@ -1,5 +1,6 @@
 import pygame
 from constants.constants import SCREEN
+from player import Player
 
 def main():
     numpass, numfail = pygame.init()
@@ -14,6 +15,11 @@ def main():
     clk = pygame.time.Clock()
     delta_time_sec = 0
 
+    # init a player
+    player = Player(
+        x=SCREEN.SCREEN_WIDTH / 2,
+        y=SCREEN.SCREEN_HEIGHT / 2
+    )
 
     # game loop
     while True:
@@ -21,6 +27,8 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
+        # draw player
+        player.draw(screen=screen)
         pygame.display.flip()
         
         # pause game loop for 1/60 sec &
