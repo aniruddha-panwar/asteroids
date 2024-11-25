@@ -15,6 +15,13 @@ def main():
     clk = pygame.time.Clock()
     delta_time_sec = 0
 
+    # Player groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
+
     # init a player
     player = Player(
         x=SCREEN.SCREEN_WIDTH / 2,
@@ -28,8 +35,16 @@ def main():
                 return
         screen.fill("black")
         # draw player
-        player.update(delta_time_sec)
-        player.draw(screen=screen)
+        # player.update(delta_time_sec)
+        # player.draw(screen=screen)
+        # group actions
+        # update
+        for obj in updatable:
+            obj.update(delta_time_sec)
+        # draw
+        for obj in drawable:
+            obj.draw(screen)
+
         pygame.display.flip()
         
         # pause game loop for 1/60 sec &
