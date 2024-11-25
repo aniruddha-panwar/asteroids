@@ -1,6 +1,8 @@
 import pygame
 from constants.constants import SCREEN
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     numpass, numfail = pygame.init()
@@ -21,6 +23,13 @@ def main():
 
     Player.containers = (updatable, drawable)
 
+    # Asteroid groups
+    asteroid_grp = pygame.sprite.Group()
+    Asteroid.containers = (asteroid_grp, updatable, drawable)
+    AsteroidField.containers = (updatable)
+
+    # init asteroidfield
+    asteroid_field = AsteroidField()
 
     # init a player
     player = Player(
@@ -33,7 +42,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill("black")
         # draw player
         # player.update(delta_time_sec)
         # player.draw(screen=screen)
@@ -41,6 +49,7 @@ def main():
         # update
         for obj in updatable:
             obj.update(delta_time_sec)
+        screen.fill("black")
         # draw
         for obj in drawable:
             obj.draw(screen)
