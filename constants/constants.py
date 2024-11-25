@@ -13,3 +13,6 @@ class SHAPE:
 
 class TURNSPEED:
     PLAYER_TURN_SPEED = 300
+
+class MOVESPEED:
+    PLAYER_SPEED = 200
