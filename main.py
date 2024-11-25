@@ -28,6 +28,7 @@ def main():
                 return
         screen.fill("black")
         # draw player
+        player.update(delta_time_sec)
         player.draw(screen=screen)
         pygame.display.flip()
         

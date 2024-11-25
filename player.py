@@ -1,5 +1,5 @@
 from circleshape import CircleShape
-from constants.constants import SHAPE
+from constants.constants import SHAPE, TURNSPEED
 import pygame
 
 class Player(CircleShape):
@@ -7,7 +7,7 @@ class Player(CircleShape):
         super().__init__(x, y, SHAPE.PLAYER_RADIUS)
         self.rotation = 0
 
-    def triangle(self):
+    def _triangle(self):
         """
         Triangle hitbox for a circular player
         """
@@ -22,6 +22,17 @@ class Player(CircleShape):
         pygame.draw.polygon(
             screen,
             "white",
-            self.triangle(),
+            self._triangle(),
             2
         )
+
+    def _rotate(self, delta_time_sec):
+        self.rotation += TURNSPEED.PLAYER_TURN_SPEED * delta_time_sec
+
+    def update(self, delta_time_sec):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self._rotate(delta_time_sec=delta_time_sec)
+        if keys[pygame.K_d]:
+            self._rotate(delta_time_sec=-1*delta_time_sec)
