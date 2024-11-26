@@ -2,3 +2,6 @@ venv/
 
 .python-version
 __pycache__
+
+*.code-workspace
+.DS_Store
