@@ -55,6 +55,10 @@ def main():
             obj.update(delta_time_sec)
 
         for asteroid_item in asteroid_grp:
+            for bullet in shots:
+                if asteroid_item.collides_with(bullet):
+                    bullet.kill()
+                    asteroid_item.kill()
             if asteroid_item.collides_with(player):
                 sys.exit("Game over!")
 
