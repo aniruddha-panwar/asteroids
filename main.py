@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants.constants import SCREEN
 from player import Player
 from asteroid import Asteroid
@@ -49,6 +50,11 @@ def main():
         # update
         for obj in updatable:
             obj.update(delta_time_sec)
+
+        for asteroid_item in asteroid_grp:
+            if asteroid_item.collides_with(player):
+                sys.exit("Game over!")
+
         screen.fill("black")
         # draw
         for obj in drawable:
